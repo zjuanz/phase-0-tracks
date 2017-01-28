@@ -15,11 +15,13 @@
     * `help`
     * `find`
     * `grep`
+
 2.**Git:**
 * What is version control and why do developers use it?
 * What is a commit? What are the best practices for commit messages?
 * What is a branch?
 * What are the 3 stages of a git change and how do you move a file from one stage to the other?
+
 3.**GitHub:**
 * Write an explanation of and compare Git and GitHub to one another.
 * In your own words, write instructions to create, clone and update a repository.
