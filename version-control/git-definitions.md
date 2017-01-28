@@ -14,3 +14,5 @@
     - enough details to give a good idea of what the changes are
 * What is a merge conflict?
     - when two different branches change the same part of code
+
+Teacher is Glenna
