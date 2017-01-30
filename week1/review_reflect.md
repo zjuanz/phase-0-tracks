@@ -30,9 +30,20 @@
 
 2.**Git:**
 * What is version control and why do developers use it?
+    - version control is a way to keep a history of changes made to a file over time and associated information such as who made the change and when.
+    - when a problem is found in a file a developer can find out when it was introduced and more easily either fix the problem or get back to a functional version. Or if pieces are added/deleted/modified by mistake the changes can be backed out by going to a different version
 * What is a commit? What are the best practices for commit messages?
+    - a commit tells the version control system to make another version/sync point for a file (or files). The commit message should have enough details to help understand what is in the set of changes. There's usually not a good excuse for not having a commit message (other than being sloppy or lazy)
 * What is a branch?
-* What are the 3 stages of a git change and how do you move a file from one stage to the other?
+    - a branch is a way of creating a separate sandbox (set of versions of files) to group together a set of of usually related changes. you can have multiple branches active at once and your changes are kept separate until they are explicitly merged back in.t
+* What are the 3 stages of a git change and how do you move a file from one stage to the other? 
+    -   committed: changes are safely stored in git databases
+    -   modified: a file has been changed so it's out of sync with the git databases
+    -   staged: a modified file has been marked as being ready for inclusion in your next commit.
+    -   use your favorite editor (e.g.`subl`) to modify a file. this moves the file from *committed* to *modified*.
+    -   when you are want to have your changes included in the next commit you use the `git add` command to move the file to the *staged* state.
+    -   once you are done with your changes and are ready for a new version to be created you can use the `git commit` command to move the file back to the *committed* state.
+    -   sometimes another state of *untracked* is used for new files that git doesn't know about. the `git add` command moves the file to the *staged* state
 
 3.**GitHub:**
 * Write an explanation of and compare Git and GitHub to one another.
