@@ -5,7 +5,9 @@
      - the server code does most of the heavy lifting in terms of deciphering the HTTP request and figuring out how to satisfy it and if appropriate to send a response back to the client via HTTP. For example inside the HTTP request may be something that turns into a database lookup and the server would do the lookup and send the results back to the client via HTTP. The client would then decide how to display the results.
  * render
      - this is the term usually associated with how the browser executable turns HTML into pixels on whatever screen is being used. 
-2. What is HTML? In your answer, include definitions of the following: 
+2. What is HTML? 
+     - HTML stands for Hypertext Markup Language and it is used to turn regular text characters into more sophisticated displays such as lists, headers, tables etc... It also allows for linking separate HTML docs together which is how we end up with a web (as in world wide web:www).
+In your answer, include definitions of the following: 
  * tag
      - these are the different keywords used by HTML elements such as the following: html, head, body, h1, ol...
  * element
