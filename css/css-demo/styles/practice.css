@@ -1,0 +1,15 @@
+section#contact-info {
+  font-size: .8em;
+}
+.job {
+  background-color: #e9e5dc;
+  border-radius: 5px;
+  padding-bottom: 5px;
+  /* padding-top: 5px; */
+}
+.list {
+  font-size: .8em;
+}
+#volunteer-experience:hover h2{
+  color : red;
+}
