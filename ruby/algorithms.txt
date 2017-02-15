@@ -1,0 +1,46 @@
+Algorithm for using an elevator.
+
+* find elevator in building
+* find buttons for going up or down
+* if desired floor is > current floor press up
+* else press down
+* wait for elevator to arrive 
+* once arrival is signaled move close to elevator
+* allow passengers to exit
+* wait for ladies to enter first
+* enter elevator (stay clear of doors)
+* find buttons for floors
+* if buttons have numbers on them then press the button for the desired floor
+* else if buttons have numbers next to them press the button next to the desired floor
+* else exit elevator
+* wait for doors to open on desired floor
+* wait of ladies to exit first
+* exit elevator
+
+Algorithm for making coffee
+* if amount of coffee left > one cup
+    - fill coffee cup 
+    - reheat 
+    - drink
+* else
+    - waiting groggily for coffee to make
+* pour out any remaining coffee
+* if time <6AM
+    - fill with 4 cups water
+* else
+    - fill with 8 cups water
+* pour water into reservoir on coffee machine
+* throw out old coffee grounds
+* get new coffee filter
+* if # filters left <10
+    - add filters to grocery list
+* fold edges to fit
+* put filter into coffee machine
+* if time <6AM
+    - add 3 scoops ground coffee
+* else
+    - add 7 scoops ground coffee
+* if ground coffee < 7 scoops left
+    - add coffee to grocery list
+* push start button
+                                                                - 
