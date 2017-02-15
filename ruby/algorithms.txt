@@ -17,4 +17,30 @@ Algorithm for using an elevator.
 * wait of ladies to exit first
 * exit elevator
 
-
+Algorithm for making coffee
+* if amount of coffee left > one cup
+    - fill coffee cup 
+    - reheat 
+    - drink
+* else
+    - waiting groggily for coffee to make
+* pour out any remaining coffee
+* if time <6AM
+    - fill with 4 cups water
+* else
+    - fill with 8 cups water
+* pour water into reservoir on coffee machine
+* throw out old coffee grounds
+* get new coffee filter
+* if # filters left <10
+    - add filters to grocery list
+* fold edges to fit
+* put filter into coffee machine
+* if time <6AM
+    - add 3 scoops ground coffee
+* else
+    - add 7 scoops ground coffee
+* if ground coffee < 7 scoops left
+    - add coffee to grocery list
+* push start button
+                                                                - 
