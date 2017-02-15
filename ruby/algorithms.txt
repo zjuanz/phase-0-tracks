@@ -1,0 +1,20 @@
+Algorithm for using an elevator.
+
+* find elevator in building
+* find buttons for going up or down
+* if desired floor is > current floor press up
+* else press down
+* wait for elevator to arrive 
+* once arrival is signaled move close to elevator
+* allow passengers to exit
+* wait for ladies to enter first
+* enter elevator (stay clear of doors)
+* find buttons for floors
+* if buttons have numbers on them then press the button for the desired floor
+* else if buttons have numbers next to them press the button next to the desired floor
+* else exit elevator
+* wait for doors to open on desired floor
+* wait of ladies to exit first
+* exit elevator
+
+
