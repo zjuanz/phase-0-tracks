@@ -12,9 +12,13 @@ for i in 1..employees do
   puts "Would you like to enroll in the company's health insurance?(y/n)"
   insurance = gets.chomp
 
-  p name, age, birth_year, garlic, insurance
+  # p name, age, birth_year, garlic, insurance
 
   probably_not_a_vampire=false;
+  #
+  # in hind sight probably should have broken age check
+  # logic out and added another boolean for age_check
+  #
   if ((2017-birth_year-age).abs<=1) && ((garlic=="y") || (insurance=="y"))
     probably_not_a_vampire=true;
   end
@@ -36,10 +40,13 @@ for i in 1..employees do
     puts "Please list any allergies. Use \"done\" when finished."
     allergies=gets.chomp
     if allergies=="sunshine"    
-      probably_a_vampire=true;
-      break;
+      probably_a_vampire=true
+      break
     end
   end
+  #
+  # a case statement would seem to be more readable code wise
+  # v.s. a stack of if/elseif/else but they might be interchangeable
   case 
   when definitely_a_vampire
     puts "Definitely a vampire"
@@ -53,3 +60,4 @@ for i in 1..employees do
     puts "Results inconclusive"
   end
 end   
+puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends!"
