@@ -21,8 +21,10 @@ def encrypt(str)
   return result_str
 end
 
+=begin
 p encrypt("abc")
 p encrypt("zed")
+=end
 # decrypt
 #
 # def decrypt(str)
@@ -50,9 +52,37 @@ def decrypt(str)
   return result_str
 end
 
+=begin
 p decrypt("bcd")
 p decrypt("afe")
 #
 # nested methods work because results and arguments are all strings
 #
 p decrypt(encrypt("sword fish"))
+=end
+
+
+#step 1
+# ask user for decrypt or encrypt
+#step 2 
+# ask for password
+#step 3
+# if decrypt
+#   p decrypt(pw)
+# else 
+#   p encrypt(pw)
+# 
+
+puts "Would you like to decrypt or encrypt (d/e)?"
+answer=gets.chomp
+
+puts "Please enter your password:"
+pw=gets.chomp
+
+if answer=="d"
+  p decrypt(pw)
+else
+  p encrypt(pw)
+end
+
+puts "thanks for using the secret password program. Have a nice day! :)"
