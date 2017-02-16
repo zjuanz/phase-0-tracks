@@ -14,7 +14,6 @@ for i in 1..employees do
 
   p name, age, birth_year, garlic, insurance
 
-
   probably_not_a_vampire=false;
   if ((2017-birth_year-age).abs<=1) && ((garlic=="y") || (insurance=="y"))
     probably_not_a_vampire=true;
@@ -32,6 +31,15 @@ for i in 1..employees do
     definitely_a_vampire=true
   end
 
+  allergies=""
+  while allergies!="done"
+    puts "Please list any allergies. Use \"done\" when finished."
+    allergies=gets.chomp
+    if allergies=="sunshine"    
+      probably_a_vampire=true;
+      break;
+    end
+  end
   case 
   when definitely_a_vampire
     puts "Definitely a vampire"
