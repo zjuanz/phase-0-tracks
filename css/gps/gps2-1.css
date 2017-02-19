@@ -1,3 +1,37 @@
+
+header {
+  background-color: green;
+  border: dotted black;
+  padding: 10px;
+  font-family: comic-sans;
+  
+  position: sticky;
+  
+}
 body {
-  background-color: blue
+  width: 960px;
+  padding: 10px;
+  margin: 15px;
+}
+.column-1 {
+  background-color: white;
+  width: 50%;
+  float: left;
+  padding:10px;
+  box-sizing: border-box;
+}
+.column-2 {
+  background-color: white;
+  width: 50%;
+  float: right;
+  padding: 10px;
+  box-sizing: border-box;
+}
+footer {
+  background-color: red;
+  clear:both;
+  padding: 10px;
+  /*
+  position: fixed;
+  */
 }
