@@ -73,6 +73,23 @@ def print_todos (tds)
 end
 def print_container (c)
 #  p "c==>",c
+#  p c.keys
+  print c[:pretty_name]," has the following children:\n"
+  c.keys.each { |key| 
+    #p "key==>",key.to_s,"\n"
+    case key.to_s
+    when "pretty_name"
+#      p c[key]
+    when "to_dos"  
+#      p c[key]
+    else
+      if c[key][:pretty_name] != nil then
+        print "\t",c[key][:pretty_name],"\n"
+      else
+        print "\t",key.to_s," is missing a pretty name\n"
+      end
+    end
+  }
   if c[:to_dos] != nil
   then 
     print c[:pretty_name]," has the following todos:\n"
