@@ -2,6 +2,8 @@
 # Santa class
 #
 class Santa
+  attr_reader :gender,:ethnicity,:reindeer_ranking,:age
+  attr_accessor :gender
   def speak
     puts "Ho,ho,ho! Haaaappy holidays!"
   end  
@@ -26,28 +28,7 @@ class Santa
     @reindeer_ranking<<rname
 
   end
-  #
-  # getter methods
-  #
-  def gender
-    @gender
-  end
-  def ethnicity
-    @ethnicity
-  end
-  def reindeer_ranking
-    @reindeer_ranking
-  end
-  def age
-    @age
-  end
-
-  #
-  # setter methods
-  #
-  def gender= (new_gender)
-    @gender = new_gender
-  end
+ 
 
 end
 
