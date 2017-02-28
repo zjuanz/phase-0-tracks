@@ -17,6 +17,38 @@ class Santa
       "Cupid", "Donner", "Blitzen"]
     @age=0
   end
+  def celebrate_birthday
+    @age+=1
+  end
+  def get_mad_at (rname)
+    # move rname reindeer to last
+    @reindeer_ranking.delete(rname)
+    @reindeer_ranking<<rname
+
+  end
+  #
+  # getter methods
+  #
+  def gender
+    @gender
+  end
+  def ethnicity
+    @ethnicity
+  end
+  def reindeer_ranking
+    @reindeer_ranking
+  end
+  def age
+    @age
+  end
+
+  #
+  # setter methods
+  #
+  def gender= (new_gender)
+    @gender = new_gender
+  end
+
 end
 
 s=Santa.new("female","hispanic")
@@ -31,5 +63,8 @@ example_genders.length.times do |i|
 end
 
 santas.each do |s|
-  p s
+  puts  "#{s.gender}:#{s.ethnicity}:#{s.age}:#{s.reindeer_ranking[-1]}"
+  s.celebrate_birthday
+  s.get_mad_at("Vixen")
+  puts  "#{s.gender}:#{s.ethnicity}:#{s.age}:#{s.reindeer_ranking[-1]}"
 end
