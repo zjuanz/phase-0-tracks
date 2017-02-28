@@ -3,7 +3,7 @@
 #
 class Santa
   attr_reader :gender,:ethnicity,:reindeer_ranking,:age
-  attr_accessor :gender
+  attr_accessor :gender,:age
   def speak
     puts "Ho,ho,ho! Haaaappy holidays!"
   end  
@@ -11,7 +11,7 @@ class Santa
     puts "That was a good #{cookie}"
   end
   def initialize(gender,ethnicity)
-    puts "Initializing Santa instance..."
+#    puts "Initializing Santa instance..."
     @gender=gender
     @ethnicity=ethnicity
     @reindeer_ranking = ["Rudolph", "Dasher", 
@@ -49,3 +49,9 @@ santas.each do |s|
   s.get_mad_at("Vixen")
   puts  "#{s.gender}:#{s.ethnicity}:#{s.age}:#{s.reindeer_ranking[-1]}"
 end
+
+10000000.times do |x|
+    s=Santa.new(example_genders[rand(5)],example_ethnicities[rand(5)])
+    s.age=rand(140)
+    puts  "#{s.gender}:#{s.ethnicity}:#{s.age}:#{s.reindeer_ranking[-1]}"
+  end
