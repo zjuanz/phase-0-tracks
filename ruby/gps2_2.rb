@@ -82,3 +82,25 @@ add_item_to_list(h,"Ice Cream",4)
 remove_item_from_list(h,"Lemonade")
 update_quantity_of_item(h,"Ice Cream",1)
 print_list(h)
+
+=begin
+What did you learn about pseudocode from working on this challenge?
+  the more detail in your pseudocode the better
+  discussion around/using pseudocode is easier because it's in english 
+What are the tradeoffs of using arrays and hashes for this challenge?
+  hash made the code cleaner since we could use item as key and quantity as value
+    would have needed more arrays running around (and being passed) to accomplish
+    the same thing
+What does a method return? 
+  the value of the last line executed
+What kind of things can you pass into methods as arguments?
+  strings, arrays, hashes, integers... most if not all basic types.
+  even learned how to do optional args and set defaults for args
+How can you pass information between methods?
+  we chose to chain the input and output hash instead of using 
+    a global variable so that all methods could have access to list
+What concepts were solidified in this challenge, and what concepts are still confusing? 
+  iteration, hashes and pseudocode are more solid. 
+  it will take a long time to learn all the cool things ruby can do but for 
+    now knowing how/when to google search will have to do.
+=end 
