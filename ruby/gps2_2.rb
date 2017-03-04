@@ -8,6 +8,7 @@
   # make sure the implicit return is the hash
 # output: hash grocery list item=>quantity
 def create_list(items_str)
+  items_hash={}
   items_array=items_str.split(" ")
   items_array.each do |it|
     items_hash[it]=1
@@ -53,9 +54,9 @@ end
 # steps:
   # overwrite existing quantity with item name->quantity in list
 # output: list
-def update_quatity_of_item(list,item,quantity)
-  add_item_to_list(list,item,quatity)
-  print_list(list)
+def update_quantity_of_item(list,item,quantity)
+  add_item_to_list(list,item,quantity)
+  list
 end
 
 # Method to print a list and make it look pretty
@@ -65,8 +66,19 @@ end
     # print key as grocery item and value as quantity
 # output: list
 def print_list(list)
+  puts "-"*20
   list.each do |item,quantity|
     puts "Item:#{item} quantity:#{quantity}"
   end
+  puts "-"*20
   list
 end
+
+h=create_list("carrots apples cereal pizza")
+add_item_to_list(h,"Lemonade",2)
+add_item_to_list(h,"Tomatoes",3)
+add_item_to_list(h,"Onions",1)
+add_item_to_list(h,"Ice Cream",4)
+remove_item_from_list(h,"Lemonade")
+update_quantity_of_item(h,"Ice Cream",1)
+print_list(h)
