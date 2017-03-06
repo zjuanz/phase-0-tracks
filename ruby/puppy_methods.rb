@@ -42,35 +42,6 @@ p fido.eat_cat
 p fido.dinner_time
 
 
-class Gus
-  attr_accessor :array
-  def initialize(i)
-    if @array == nil then
-      @array==[]
-    end
-  #  @array<<i
-  end
-
-  def modulo_2(x) 
-    x % 2
-  end
-
-  def square(y)
-    y*y
-  end
-end
-
-#array=[]
-count=0
-while count<50
-  Gus.new(count)
-  count+=1
-end
-
-#p array.each.modulo_2
-
-
-
 class Gymnast
   def initialize
     puts " initialzing" 
