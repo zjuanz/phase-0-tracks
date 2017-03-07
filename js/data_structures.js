@@ -10,6 +10,10 @@ console.log(colors);
 //
 // array of four names
 //
+var names = [ "Ed", "Jose",
+              "Cheval",
+              "Relampago"];
 
+console.log(names);
 //
 // 
