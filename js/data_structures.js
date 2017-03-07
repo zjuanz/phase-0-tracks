@@ -17,3 +17,9 @@ var names = [ "Ed", "Jose",
 console.log(names);
 //
 // 
+
+colors.push("pink");
+
+names.push("Trump");
+
+console.log(names,colors);
