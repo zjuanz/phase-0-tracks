@@ -30,6 +30,19 @@ function longest(array) {
   return longest_entry;
 }
 
+function share_key_value(x,y){
+  // compare two objects to see if they share
+  // at least one key->value pair
+
+  for (var key in x) {
+    console.log(key,x[key],y[key]);
+    if (x[key]==y[key]) {
+      console.log(key,x[key],y[key]," matches.");
+      return true;
+    };
+  }
+  return false; // no match found
+}
 
 console.log(longest(test_array));
 
@@ -42,4 +55,19 @@ test_array = ["aaaaa", "aaaa","aaa",
               "bbbbbbbbb","cccc","ccccc"];
 
 console.log(longest(test_array));
-              
+
+
+test_object = {
+  name: "Tamir",
+  age: 54
+}
+
+test_object_2 = {
+  name: "Steven",
+  age: 54
+}
+
+test_object_3 = {}
+
+console.log(share_key_value(test_object,test_object_2));
+console.log(share_key_value(test_object,test_object_3));
