@@ -82,3 +82,16 @@ var yetAnotherCar = new Car("purple",
                             2017);
 console.log(yetAnotherCar);
 yetAnotherCar.honk();
+
+//
+// release 3
+//
+
+for (var key in yetAnotherCar) {
+  if (!yetAnotherCar.hasOwnProperty(key)) continue;
+  console.log(key,yetAnotherCar[key]);
+}
+
+Object.keys(yetAnotherCar).forEach(function(key){
+  console.log(key,yetAnotherCar[key]);
+})
