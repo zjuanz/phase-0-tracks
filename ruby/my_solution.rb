@@ -150,3 +150,21 @@ end
 
 #=======================================================================
 # Reflection Section
+#
+# 
+# What are the differences between the two different hash syntaxes shown in the state_data file?
+# - the top level key uses the state name strings 
+# - the nested hash (hashy hash) uses symbols
+# What does require_relative do? How is it different from require?
+# - require_relative looks for files to pull in starting from the same directory as the file using the require_relative
+# - require looks for files to pull in and you have to either provide the full path to the file you are looking for 
+#   or have it somewhere in the ruby $LOAD_PATH 
+# What are some ways to iterate through a hash?
+# - one option is to use the .each method which passes the key=>value pair
+# - you can also use the .keys method to get an array of keys to then use .each 
+# - there are also the .each_key and .each_value methods that might be applicable
+# When refactoring virus_effects, what stood out to you about the variables, if anything?
+# - there was an unnecessary use of arguments/parameters since variables are accessible by method directly
+# What concept did you most solidify in this challenge?
+# - iteration
+# - DRY/refactoring 
