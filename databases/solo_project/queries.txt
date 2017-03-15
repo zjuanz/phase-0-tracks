@@ -1,0 +1,147 @@
+1. Display the information in one table (either table is fine).
+
+
+sqlite> select * from families;
+1|Bourianoff
+2|Bourianoff-Zalles
+sqlite>
+
+
+2. Update an item that meets some condition (you can choose a condition that makes sense).
+
+
+sqlite> select * from persons;
+1|George|1|70
+2|Juan|2|57
+3|Michelle|2|50
+4|Zac|2|17
+5|Alex|2|14
+6|Matthew|2|6
+7|Nico|2|6
+9|Linda|1|69
+10|Angela|1|25
+sqlite> update persons set age=68 where id=9;
+sqlite> select * from persons;
+1|George|1|70
+2|Juan|2|57
+3|Michelle|2|50
+4|Zac|2|17
+5|Alex|2|14
+6|Matthew|2|6
+7|Nico|2|6
+9|Linda|1|68
+10|Angela|1|25
+sqlite>
+
+
+3. Display the information in both tables using one query.
+
+
+
+sqlite> select persons.*,families.* from persons join families on persons.family_id = families.id;
+1|George|1|70|1|Bourianoff
+2|Juan|2|57|2|Bourianoff-Zalles
+3|Michelle|2|50|2|Bourianoff-Zalles
+4|Zac|2|17|2|Bourianoff-Zalles
+5|Alex|2|14|2|Bourianoff-Zalles
+6|Matthew|2|6|2|Bourianoff-Zalles
+7|Nico|2|6|2|Bourianoff-Zalles
+9|Linda|1|68|1|Bourianoff
+10|Angela|1|25|1|Bourianoff
+sqlite>
+
+
+4. Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+
+
+sqlite> select persons.name,families.name from persons join families on persons.family_id = families.id;
+George|Bourianoff
+Juan|Bourianoff-Zalles
+Michelle|Bourianoff-Zalles
+Zac|Bourianoff-Zalles
+Alex|Bourianoff-Zalles
+Matthew|Bourianoff-Zalles
+Nico|Bourianoff-Zalles
+Linda|Bourianoff
+Angela|Bourianoff
+sqlite>
+
+5. Delete an item that meets some condition (you can choose a condition that makes sense).
+
+
+sqlite> select * from persons;
+1|George|1|70
+2|Juan|2|57
+3|Michelle|2|50
+4|Zac|2|17
+5|Alex|2|14
+6|Matthew|2|6
+7|Nico|2|6
+9|Linda|1|68
+10|Angela|1|25
+11|Skipper|2|10
+sqlite> delete from persons where id=11;
+sqlite> select * from persons;
+1|George|1|70
+2|Juan|2|57
+3|Michelle|2|50
+4|Zac|2|17
+5|Alex|2|14
+6|Matthew|2|6
+7|Nico|2|6
+9|Linda|1|68
+10|Angela|1|25
+sqlite>
+
+
+JOIN using CROSS
+
+sqlite> select persons.name,families.name from persons cross join families;
+George|Bourianoff
+George|Bourianoff-Zalles
+Juan|Bourianoff
+Juan|Bourianoff-Zalles
+Michelle|Bourianoff
+Michelle|Bourianoff-Zalles
+Zac|Bourianoff
+Zac|Bourianoff-Zalles
+Alex|Bourianoff
+Alex|Bourianoff-Zalles
+Matthew|Bourianoff
+Matthew|Bourianoff-Zalles
+Nico|Bourianoff
+Nico|Bourianoff-Zalles
+Linda|Bourianoff
+Linda|Bourianoff-Zalles
+Angela|Bourianoff
+Angela|Bourianoff-Zalles
+sqlite>
+
+
+JOIN using LEFT OUTER
+
+
+sqlite> select * from families;
+1|Bourianoff
+2|Bourianoff-Zalles
+sqlite> insert into families (name) values("Zalles");
+sqlite> select * from families
+   ...> ;
+1|Bourianoff
+2|Bourianoff-Zalles
+3|Zalles
+sqlite> select families.name,persons.name from families left outer join persons on families.id = persons.family_id;
+Bourianoff|Angela
+Bourianoff|George
+Bourianoff|Linda
+Bourianoff-Zalles|Alex
+Bourianoff-Zalles|Juan
+Bourianoff-Zalles|Matthew
+Bourianoff-Zalles|Michelle
+Bourianoff-Zalles|Nico
+Bourianoff-Zalles|Zac
+Zalles|
+sqlite>
+
+JOIN using INNER
+see join in 4. above

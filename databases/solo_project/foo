@@ -1,0 +1,10 @@
+CREATE TABLE families (
+id integer primary key,
+name varchar(255)
+);
+CREATE TABLE persons (
+id integer primary key,
+name varchar(255),
+family_id integer, age integer,
+foreign key(family_id) references families(id)
+);

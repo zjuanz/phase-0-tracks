@@ -1,0 +1,79 @@
+SQLite version 3.8.7.2 2014-11-18 20:57:56
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE families (
+id integer primary key,
+name varchar(255)
+);
+CREATE TABLE persons (
+id integer primary key,
+name varchar(255),
+family_id integer, age integer,
+foreign key(family_id) references families(id)
+);
+sqlite> 1|Bourianoff
+2|Bourianoff-Zalles
+sqlite> 1|George|1|70
+2|Juan|2|57
+3|Michelle|2|50
+4|Zac|2|17
+5|Alex|2|14
+6|Matthew|2|6
+7|Nico|2|6
+9|Linda|1|70
+10|Angela|1|25
+sqlite> sqlite> 1|Bourianoff|1|George|1|70
+2|Bourianoff-Zalles|2|Juan|2|57
+2|Bourianoff-Zalles|3|Michelle|2|50
+2|Bourianoff-Zalles|4|Zac|2|17
+2|Bourianoff-Zalles|5|Alex|2|14
+2|Bourianoff-Zalles|6|Matthew|2|6
+2|Bourianoff-Zalles|7|Nico|2|6
+1|Bourianoff|9|Linda|1|70
+1|Bourianoff|10|Angela|1|25
+sqlite> Bourianoff|George
+Bourianoff-Zalles|Juan
+Bourianoff-Zalles|Michelle
+Bourianoff-Zalles|Zac
+Bourianoff-Zalles|Alex
+Bourianoff-Zalles|Matthew
+Bourianoff-Zalles|Nico
+Bourianoff|Linda
+Bourianoff|Angela
+sqlite> sqlite> 1|George|1|70
+2|Juan|2|57
+3|Michelle|2|50
+4|Zac|2|17
+5|Alex|2|14
+6|Matthew|2|6
+7|Nico|2|6
+9|Linda|1|69
+10|Angela|1|25
+sqlite> 1|Bourianoff|1|George|1|70
+2|Bourianoff-Zalles|2|Juan|2|57
+2|Bourianoff-Zalles|3|Michelle|2|50
+2|Bourianoff-Zalles|4|Zac|2|17
+2|Bourianoff-Zalles|5|Alex|2|14
+2|Bourianoff-Zalles|6|Matthew|2|6
+2|Bourianoff-Zalles|7|Nico|2|6
+1|Bourianoff|9|Linda|1|69
+1|Bourianoff|10|Angela|1|25
+sqlite> sqlite> 1|Bourianoff|1|George|1|70
+2|Bourianoff-Zalles|2|Juan|2|57
+2|Bourianoff-Zalles|3|Michelle|2|50
+2|Bourianoff-Zalles|4|Zac|2|17
+2|Bourianoff-Zalles|5|Alex|2|14
+2|Bourianoff-Zalles|6|Matthew|2|6
+2|Bourianoff-Zalles|7|Nico|2|6
+1|Bourianoff|9|Linda|1|69
+1|Bourianoff|10|Angela|1|25
+2|Bourianoff-Zalles|11|Skipper|2|10
+sqlite> sqlite> 1|Bourianoff|1|George|1|70
+2|Bourianoff-Zalles|2|Juan|2|57
+2|Bourianoff-Zalles|3|Michelle|2|50
+2|Bourianoff-Zalles|4|Zac|2|17
+2|Bourianoff-Zalles|5|Alex|2|14
+2|Bourianoff-Zalles|6|Matthew|2|6
+2|Bourianoff-Zalles|7|Nico|2|6
+1|Bourianoff|9|Linda|1|69
+1|Bourianoff|10|Angela|1|25
+sqlite> 
