@@ -2,14 +2,37 @@
 #
 # rudimentary todo handler using sqlite3 database
 #
+require "sqlite3"
 
 # 
 # create_todo_table method
 #
 def create_todo_table(name)
-  #
+  # create SQLites3 db
+  db = SQLite3::Database.new("todo.db")
+  db.results_as_hash = true  # get row info in hash
+
   # build sql string with name
+  create_table_cmd = <<-SQL
+  CREATE TABLE IF NOT EXISTS '#{name}' (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255),
+    age INT
+    )
+  SQL
+ # create_table_cmd.sub!("/[_]/",name)
+  p create_table_cmd
+  p name
+  stm = db.prepare create_table_cmd
+  p stm
+ # stm.bind_param 1, name
+ # p stm
   # call sql command to create
+  p create_table_cmd
+  p name
+  #db.execute(create_table_cmd,[name])
+  #db.execute(create_table_cmd)
+  stm.execute
   # 
   # return db
 end
@@ -45,7 +68,7 @@ end
 #
 # loop prompting for actions
 #
-p "hi"
+
 loop do
 
   #
