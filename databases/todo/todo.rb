@@ -34,7 +34,7 @@ def create_todo_table(name)
   create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS '#{name}' (
     id INTEGER PRIMARY KEY,
-    taskk VARCHAR(255),
+    task VARCHAR(255),
     due_date DATE,
     priority INTEGER,
     owner_id INTEGER,
@@ -56,26 +56,39 @@ end
 #
 # add todo method
 #
-def add_todo(db,owner,task,date,priority)
+def add_todo(db,name,owner,task,date,priority,status)
   #
   # build sql command with arguments
   # invoke sql command
+  db.execute("INSERT INTO #{name} (owner_id,task,due_date,priority,status_id) VALUES(?,?,?,?,?)",
+    [owner,task,date,priority,status])
   # call list method
+  list(db,name)
 
 end
 
 #
 # list method
 #
-def list(db)
+def list(db,name)
   #
+  puts "#{name} has the following data:"
   # build sql command to return contents of table
   # invoke command
+  tasks = db.execute("SELECT * FROM #{name}")
   # loop through each row
+  tasks.each do |task| 
+    p task
+  end
   # => print contents
 
 end
 
+def load_status(db)
+
+  status = db.execute("SELECT * FROM 'status'")
+  
+end
 
 #
 # driver code
@@ -84,6 +97,11 @@ end
 #
 # loop prompting for actions
 #
+
+db=nil
+name=""
+status=[]
+status_id=0
 
 loop do
 
@@ -97,13 +115,49 @@ loop do
     puts "thanks!"
     break
   when "list"
-    list(db)
+    list(db,name)
   when "create"
     puts "enter table name:"
     name=gets.chomp
 
     db=create_todo_table(name)
-  else
+    
+  when "add"
+    puts "Enter todo description:"
+    desc=gets.chomp
+    puts "Enter priority (1-10):"
+    priority=gets.chomp.to_i
+    puts "Enter due date:"
+    due_date=gets.chomp
+
+    if status.length==0 then
+      status=load_status(db)
+      status.each do |x|
+        p x["status"]
+        if x["status"]=="open" then
+          status_id=x["id"]
+        end
+      end
+    end
+    p status_id
+    
+    puts "Enter id for owner:"
+    list(db,"owners")
+    owner_id=gets.chomp.to_i
+    if owner_id == 0 then
+      puts "Enter name for new owner:"
+      owner_name=gets.chomp
+      db.execute("INSERT INTO owners (name) VALUES(?)",[owner_name])
+      puts "Enter id for owner:"
+      list(db,"owners")
+      owner_id=gets.chomp.to_i
+    end  
+
+    add_todo(db,name,owner_id,desc,due_date,priority,status_id)
+
+
+
+  else 
     puts "unknown action:#{action}"    
   end
   # ask for data based on action
