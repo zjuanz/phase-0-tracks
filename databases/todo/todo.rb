@@ -12,29 +12,45 @@ def create_todo_table(name)
   db = SQLite3::Database.new("todo.db")
   db.results_as_hash = true  # get row info in hash
 
+  create_table_cmd = <<-SQL
+  CREATE TABLE IF NOT EXISTS 'owners' (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255)
+  );
+  SQL
+  stm = db.prepare create_table_cmd
+  stm.execute
+
+  create_table_cmd = <<-SQL
+  CREATE TABLE IF NOT EXISTS 'status' (
+    id INTEGER PRIMARY KEY,
+    status VARCHAR(255)
+  );
+  SQL
+  stm = db.prepare create_table_cmd
+  stm.execute
+
   # build sql string with name
   create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS '#{name}' (
     id INTEGER PRIMARY KEY,
-    name VARCHAR(255),
-    age INT
-    )
+    taskk VARCHAR(255),
+    due_date DATE,
+    priority INTEGER,
+    owner_id INTEGER,
+    status_id INTEGER,
+    FOREIGN KEY (owner_id) REFERENCES owners(id),
+    FOREIGN KEY (status_id) REFERENCES status(id)
+    );
   SQL
- # create_table_cmd.sub!("/[_]/",name)
-  p create_table_cmd
-  p name
+
   stm = db.prepare create_table_cmd
-  p stm
- # stm.bind_param 1, name
- # p stm
   # call sql command to create
-  p create_table_cmd
-  p name
-  #db.execute(create_table_cmd,[name])
-  #db.execute(create_table_cmd)
+
   stm.execute
   # 
   # return db
+  db
 end
 
 #
