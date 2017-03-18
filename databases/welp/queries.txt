@@ -1,0 +1,26 @@
+SELECT * FROM reviews,users,businesses WHERE reviews.user_id = users.id AND reviews.business_id = businesses.id; 
+
+
+sqlite> SELECT * FROM reviews,users,businesses WHERE reviews.user_id = users.id AND reviews.business_id = businesses.id;
+1|5|Awesome prices!|1|1|1|Nicole|Speirs|1|Walmart
+2|5|Great makeup!|2|1|1|Nicole|Speirs|2|Sephora
+3|5|Awesome prices!|4|4|4|Lili|Thomas|4|ToysRUs
+4|5|Awesome toys!|3|3|3|Nico|Zalles|3|Target
+sqlite>
+
+SELECT FIRST_NAME,LAST_NAME,NAME,STARS,COMMENT FROM reviews,users,businesses WHERE reviews.user_id = users.id AND reviews.business_id = businesses.id;
+
+
+sqlite> SELECT FIRST_NAME,LAST_NAME,NAME,STARS,COMMENT FROM reviews,users,businesses WHERE reviews.user_id = users.id AND reviews.business_id = businesses.id;
+Nicole|Speirs|Walmart|5|Awesome prices!
+Nicole|Speirs|Sephora|5|Great makeup!
+Lili|Thomas|ToysRUs|5|Awesome prices!
+Nico|Zalles|Target|5|Awesome toys!
+sqlite>
+
+SELECT FIRST_NAME,LAST_NAME,NAME,STARS,COMMENT FROM reviews,users,businesses WHERE reviews.user_id = users.id AND reviews.business_id = businesses.id AND name="ToysRUs";
+
+
+sqlite> SELECT FIRST_NAME,LAST_NAME,NAME,STARS,COMMENT FROM reviews,users,businesses WHERE reviews.user_id = users.id AND reviews.business_id = businesses.id AND name="ToysRUs";
+Lili|Thomas|ToysRUs|5|Awesome prices!
+sqlite>
