@@ -75,10 +75,28 @@ def list(db,name)
   puts "#{name} has the following data:"
   # build sql command to return contents of table
   # invoke command
-  tasks = db.execute("SELECT * FROM #{name}")
+  if (name=="status")||(name=="owners") then
+    rows = db.execute("SELECT * FROM #{name}")
+  elsif (name=="tables")
+    rows = db.execute("SELECT * FROM sqlite_master")
+  else
+    rows = db.execute("SELECT * FROM #{name},owners,status WHERE home.owner_id=owners.id AND home.status_id=status.id")
+  end
+
   # loop through each row
-  tasks.each do |task| 
-    p task
+  rows.each do |row| 
+    p row
+    case name
+    when "status"
+      puts row["id"].to_s+":"+row["status"]
+    when "owners"
+      puts row["id"].to_s+":"+row["name"]
+    when "tables"
+      puts row["type"]+":"+row["name"]
+    else
+      puts row[0].to_s+":"+row["task"]+"==>"+row["name"]
+      puts "\tdue:"+row["due_date"].to_s+"("+row["priority"].to_s+"/"+row["status"]+")"
+    end
   end
   # => print contents
 
@@ -90,6 +108,19 @@ def load_status(db)
   
 end
 
+def drop_todo_table(db,name)
+  list(db,"tables")
+  db.execute("DROP TABLE #{name}")
+  list(db,"tables")
+end
+
+def delete_todo(db,name,task_id)
+  db.execute("DELETE FROM #{name} WHERE id=#{task_id}")
+end
+
+def update_todo(db,name,task_id,column_name,value)
+  db.execute("UPDATE #{name} set #{column_name} = #{value} where id=#{task_id}")
+end
 #
 # driver code
 #
@@ -121,12 +152,29 @@ loop do
     name=gets.chomp
 
     db=create_todo_table(name)
+  when "drop"
+    puts "enter table name:"
+    name=gets.chomp
+
+    drop_todo_table(db,name)
+
+  when "delete"
+    list(db,name)
+    puts "Enter task ID to delete:"
+    task_id=gets.chomp.to_i
+    if task_id>0 then
+      delete_todo(db,name,task_id)
+    end
+    list(db,name)
     
   when "add"
     puts "Enter todo description:"
     desc=gets.chomp
     puts "Enter priority (1-10):"
     priority=gets.chomp.to_i
+    #
+    # need to fix problem with how DATE is handled
+    #
     puts "Enter due date:"
     due_date=gets.chomp
 
@@ -155,6 +203,22 @@ loop do
 
     add_todo(db,name,owner_id,desc,due_date,priority,status_id)
 
+  when "update"
+    list(db,name)
+    puts "enter ID for task to update"
+    task_id=gets.chomp.to_i
+    if task_id > 0 then
+      
+      column_name="foo"
+      while column_name != ""
+        puts "Enter column name to update:"
+        column_name=gets.chomp
+        break if column_name==""
+        puts "Enter value for updated column:"
+        value=gets.chomp
+        update_todo(db,name,task_id,column_name,value)
+      end
+    end
 
 
   else 
@@ -171,4 +235,6 @@ loop do
   # => list: print current todo table with list method
   # => add: prompt for owner, task, date,priority
   # =>      call add_todo method 
+  # => delete: remove a task
+  # => update: update an existing task
 end
