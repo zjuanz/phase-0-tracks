@@ -3,6 +3,7 @@
 # rudimentary todo handler using sqlite3 database
 #
 require "sqlite3"
+require "date"
 
 # 
 # create_todo_table method
@@ -85,7 +86,7 @@ def list(db,name)
 
   # loop through each row
   rows.each do |row| 
-    p row
+   # p row
     case name
     when "status"
       puts row["id"].to_s+":"+row["status"]
@@ -95,7 +96,11 @@ def list(db,name)
       puts row["type"]+":"+row["name"]
     else
       puts row[0].to_s+":"+row["task"]+"==>"+row["name"]
-      puts "\tdue:"+row["due_date"].to_s+"("+row["priority"].to_s+"/"+row["status"]+")"
+      #
+      # convert julian date to mm/dd/yy
+      #
+      due_date_str=Date.jd(row["due_date"]).strftime('%m/%d/%y')
+      puts "\tdue:"+due_date_str+"("+row["priority"].to_s+"/"+row["status"]+")"
     end
   end
   # => print contents
@@ -121,6 +126,16 @@ end
 def update_todo(db,name,task_id,column_name,value)
   db.execute("UPDATE #{name} set #{column_name} = #{value} where id=#{task_id}")
 end
+
+def add_owner(db)
+    puts "Enter name for new owner:"
+    owner_name=gets.chomp
+    db.execute("INSERT INTO owners (name) VALUES(?)",[owner_name])
+    puts "Enter id for owner:"
+    list(db,"owners")
+    owner_id=gets.chomp.to_i
+end
+
 #
 # driver code
 #
@@ -175,30 +190,29 @@ loop do
     #
     # need to fix problem with how DATE is handled
     #
-    puts "Enter due date:"
-    due_date=gets.chomp
+    puts "Enter due date(MM/DD/YY without zero padding):"
+    due_date_str=gets.chomp
+    #
+    # convert due date to julian
+    #
+    due_date=Date.strptime(due_date_str,"%m/%d/%y").jd
 
     if status.length==0 then
       status=load_status(db)
       status.each do |x|
-        p x["status"]
+   #     p x["status"]
         if x["status"]=="open" then
           status_id=x["id"]
         end
       end
     end
-    p status_id
+    #p status_id
     
     puts "Enter id for owner:"
     list(db,"owners")
     owner_id=gets.chomp.to_i
     if owner_id == 0 then
-      puts "Enter name for new owner:"
-      owner_name=gets.chomp
-      db.execute("INSERT INTO owners (name) VALUES(?)",[owner_name])
-      puts "Enter id for owner:"
-      list(db,"owners")
-      owner_id=gets.chomp.to_i
+      owner_id=add_owner(db)
     end  
 
     add_todo(db,name,owner_id,desc,due_date,priority,status_id)
@@ -214,8 +228,34 @@ loop do
         puts "Enter column name to update:"
         column_name=gets.chomp
         break if column_name==""
-        puts "Enter value for updated column:"
-        value=gets.chomp
+        case column_name
+          when "due_date"
+            puts "Enter value for updated due date:"
+            value=gets.chomp
+          #
+          # convert due date to julian
+          #
+            value=Date.strptime(value,"%m/%d/%y")
+         # p value
+         # p value.jd
+            value=value.jd
+          when "status"
+            list(db,"status")
+            puts "Enter value for updated status id"
+            value=gets.chomp
+            column_name="status_id"
+          when "owner"
+            list(db,"owners")
+            puts "Enter value for updated owner id"
+            value=gets.chomp
+            if value=="0" then
+              value=add_owner(db)
+            end
+            column_name="owner_id"
+          else
+            puts "Enter value for updated column:"
+            value=gets.chomp
+        end
         update_todo(db,name,task_id,column_name,value)
       end
     end
