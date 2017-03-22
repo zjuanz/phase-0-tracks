@@ -1,5 +1,6 @@
 # require gems
 require 'sinatra'
+require 'sinatra/reloader'
 require 'sqlite3'
 
 db = SQLite3::Database.new("students.db")
@@ -43,4 +44,39 @@ end
 get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
+end
+
+#
+# Release 0 Routes
+#
+# /contact
+#
+get '/contact' do
+  'For more information contact <a href="mailto:info@randomemail.com"> info </a>'
+end
+
+#
+# great job
+#
+get '/great_job' do
+  #response=params.to_s+'<br>'
+  response='<br>'
+  name = params[:name]
+  if name then
+    response+="<br>Good job, #{name}!!!"
+  else
+    response+="<br>Good job dude!!!"
+  end
+      
+end
+
+#
+# use route parameters to add two numbers
+#
+get '/:num1/plus/:num2' do
+  response=params.to_s+'<br>'
+  response='<br>'
+  result=params[:num1].to_i+params[:num2].to_i
+  response+=params[:num1]+"+"+params[:num2]+"="+result.to_s
+  
 end
