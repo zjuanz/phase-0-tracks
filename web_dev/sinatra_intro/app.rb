@@ -5,6 +5,7 @@ require 'sqlite3'
 
 db = SQLite3::Database.new("students.db")
 db.results_as_hash = true
+db.trace {|sql| p sql}
 
 # write a basic GET route
 # add a query parameter
@@ -79,4 +80,21 @@ get '/:num1/plus/:num2' do
   result=params[:num1].to_i+params[:num2].to_i
   response+=params[:num1]+"+"+params[:num2]+"="+result.to_s
   
+end
+
+#
+# bonus
+# 
+get '/students/order/:order' do
+  response=params.to_s+"<br>"+params[:order]+"<br>"
+  #
+  # the following query didn't work because the column name gets put in with single quotes
+  # => for whatever reason that format fails sort by the requested column
+
+  #students=db.execute("SELECT * FROM students ORDER BY ?",params[:order])
+  students=db.execute("SELECT * FROM students ORDER BY #{params[:order]}")
+  students.each do |student|
+    response+=student.to_s+"<br>"
+  end
+  response
 end
