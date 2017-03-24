@@ -18,6 +18,12 @@ get '/students/new' do
   erb :new_student
 end
 
+get '/students/delete' do
+  @students = db.execute("SELECT id,* FROM students")
+  erb :delete_student
+end
+
+
 get '/campus/:campus_request' do
   @campus = params[:campus_request]
   @students = db.execute("SELECT * FROM students WHERE campus=?",[params[:campus_request]])
@@ -34,5 +40,13 @@ post '/students' do
   db.execute("INSERT INTO students (name, campus, age) VALUES (?,?,?)", [params['name'], params['campus'], params['age'].to_i])
   redirect '/'
 end
+
+# remove student via a form
+
+post '/remove_student' do
+  db.execute("DELETE FROM students WHERE id=?",[params['id']])
+  redirect '/students/delete'
+end
+
 
 # add static resources
