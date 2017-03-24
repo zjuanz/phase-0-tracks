@@ -1,0 +1,10 @@
+<h1>Campus <%=@campus%></h1>
+ <ul>
+    <% if @students.length > 0 then %>
+    <% @students.each do |student| %>
+      <li><%= student['name'] %>, <%= student['age'] %></li>
+    <% end %>
+    <% else %>
+    <p> campus <%= @campus %> has no students!</p>
+    <% end %>
+  </ul>

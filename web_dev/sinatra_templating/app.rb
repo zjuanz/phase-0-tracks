@@ -1,5 +1,6 @@
 # require gems
 require 'sinatra'
+require 'sinatra/reloader'
 require 'sqlite3'
 
 set :public_folder, File.dirname(__FILE__) + '/static'
@@ -15,6 +16,16 @@ end
 
 get '/students/new' do
   erb :new_student
+end
+
+get '/campus/:campus_request' do
+  @campus = params[:campus_request]
+  @students = db.execute("SELECT * FROM students WHERE campus=?",[params[:campus_request]])
+  if @students.length >= 0 then
+    erb :campus
+  else
+    "Sorry #{@campus} is not a valid campus!"
+  end
 end
 
 # create new students via
